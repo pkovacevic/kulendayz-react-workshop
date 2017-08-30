@@ -1,11 +1,15 @@
 import * as React from 'react';
 
-class Footer extends React.Component<{}, {}> {
+interface IFooterProps {
+  text: string
+}
+
+class Footer extends React.Component<IFooterProps, {}> {
   render() {
     return (
       <div>
-        <hr/>
-        Kulendayz {(new Date()).getFullYear()}
+        <hr />
+        {this.props.text} {(new Date()).getFullYear()}
       </div>
     );
   }

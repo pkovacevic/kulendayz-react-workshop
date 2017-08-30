@@ -1,12 +1,25 @@
 import * as React from 'react';
 import Movie from './Movie';
+import Label from './Label';
+import IMovie from '../models/IMovie';
 
-class MovieList extends React.Component<{}, {}> {
+interface IMoviesListProps {
+    movies: IMovie[];
+}
+
+class MovieList extends React.Component<IMoviesListProps, {}> {
     render() {
+        const movies = this.props.movies.map((m, i) => (
+            <Movie
+                key={m.id}
+                index={i}
+                movie={m}
+            />));
+
         return (
             <div className="row">
                 <div className="col-md-12">
-                    <h4>My movie list</h4>
+                    <Label text="My movie list"></Label>
                     <table className="table table-striped">
                         <thead>
                             <tr>
@@ -17,10 +30,7 @@ class MovieList extends React.Component<{}, {}> {
                             </tr>
                         </thead>
                         <tbody>
-                            <Movie></Movie>
-                            <Movie></Movie>
-                            <Movie></Movie>
-                            <Movie></Movie>
+                            {movies}
                         </tbody>
                     </table>
                 </div>

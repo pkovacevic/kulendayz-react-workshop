@@ -1,14 +1,18 @@
 import * as React from 'react';
 
-class App extends React.Component<{}, {}> {
+interface IHeaderProps{
+    text: string
+}
+
+class Header extends React.Component<IHeaderProps, {}> {
     render() {
         return (
             <div className="row">
-                <h1 className="col-md-12">My movie list</h1>
+                <h1 className="col-md-12">{this.props.text}</h1>
             </div>
 
         );
     }
 }
 
-export default App;
+export default Header;

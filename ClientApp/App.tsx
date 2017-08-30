@@ -4,16 +4,17 @@ import FilterBox from './components/FilterBox';
 import MovieList from './components/MovieList';
 import AddMovieBox from './components/AddMovieBox';
 import Footer from './components/Footer';
+import {getMovies} from './services/movieService';
 
 class App extends React.Component<{}, {}> {
   render() {
     return (
       <div className="container">
-        <Header />
+        <Header text="Movies" />
         <FilterBox />
-        <MovieList />
+        <MovieList movies={getMovies()} />
         <AddMovieBox />
-        <Footer />
+        <Footer text="Kulendayz" />
       </div>
     );
   }

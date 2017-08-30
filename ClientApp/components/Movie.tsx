@@ -1,26 +1,35 @@
 import * as React from 'react';
+import IMovie from '../models/IMovie';
 
-class Movie extends React.Component<{}, {}> {
+interface IMovieProps {
+  movie: IMovie;
+  index: number;
+}
+
+class Movie extends React.Component<IMovieProps, {}> {
   render() {
     return (
       <tr>
         <td>
-          1.
+          {this.props.index + 1}
         </td>
         <td>
-          Matrix
+          {this.props.movie.title}
         </td>
         <td>
           <button className="btn btn-default">
-            <span className="glyphicon glyphicon-ok"></span>
+            <span className={this.props.movie.isWatched ?
+              "glyphicon glyphicon-ok" : "glyphicon glyphicon-minus"}>
+            </span>
           </button>
         </td>
         <td>
-          <button className="btn btn-danger">
+          <button 
+            className="btn btn-danger">
             <span className="glyphicon glyphicon-trash"></span>
           </button>
         </td>
-      </tr>    );
+      </tr>);
   }
 }
 
