@@ -1,10 +1,11 @@
 import 'bootstrap';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import App from './App';
 
 function renderApp() {
     ReactDOM.render(
-        <div>Hello World!</div>,
+        <App />,
         document.getElementById('react-app')
     );
 }
