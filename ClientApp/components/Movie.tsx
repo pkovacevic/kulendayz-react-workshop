@@ -4,7 +4,8 @@ import IMovie from '../models/IMovie';
 interface IMovieProps {
   movie: IMovie;
   index: number;
-  toggleWatchedMovieCallback: (id: number) => void
+  toggleWatchedMovieCallback: (id: number) => void;
+  removeMovieCallback: (id: number) => void;
 }
 
 
@@ -26,7 +27,8 @@ class Movie extends React.Component<IMovieProps, {}> {
           </button>
         </td>
         <td>
-          <button className="btn btn-danger">
+          <button onClick={() => this.props.removeMovieCallback(this.props.movie.id)} 
+            className="btn btn-danger">
             <span className="glyphicon glyphicon-trash"></span>
           </button>
         </td>

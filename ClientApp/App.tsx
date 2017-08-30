@@ -49,14 +49,25 @@ class App extends React.Component<{}, IAppState> {
     });
   }
 
+  removeMovieCallback = (movieId: number) => {
+    this.setState(prevState => {
+      return {
+        movies: prevState.movies.filter(m => m.id != movieId)
+      }
+    });
+  }
+
   render() {
     return (
       <div className="container">
         {this.state.isLoading && <div>Loading...</div>}
         <Header text="Movies" />
         <FilterBox />
-        <MovieList movies={this.state.movies}
-          toggleWatchedMovieCallback={this.toggleWatchedMovieCallback} />
+        <MovieList
+          movies={this.state.movies}
+          toggleWatchedMovieCallback={this.toggleWatchedMovieCallback}
+          removeMovieCallback={this.removeMovieCallback}
+        />
         <AddMovieBox />
         <Footer text="Kulendayz" />
       </div>
