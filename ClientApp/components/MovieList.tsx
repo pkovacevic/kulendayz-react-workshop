@@ -5,16 +5,18 @@ import IMovie from '../models/IMovie';
 
 interface IMoviesListProps {
     movies: IMovie[];
+    toggleWatchedMovieCallback: (id: number) => void;
+
 }
 
 class MovieList extends React.Component<IMoviesListProps, {}> {
+
     render() {
         const movies = this.props.movies.map((m, i) => (
-            <Movie
+            <Movie toggleWatchedMovieCallback={this.props.toggleWatchedMovieCallback}
                 key={m.id}
                 index={i}
-                movie={m}
-            />));
+                movie={m} />));
 
         return (
             <div className="row">

@@ -4,7 +4,9 @@ import IMovie from '../models/IMovie';
 interface IMovieProps {
   movie: IMovie;
   index: number;
+  toggleWatchedMovieCallback: (id: number) => void
 }
+
 
 class Movie extends React.Component<IMovieProps, {}> {
   render() {
@@ -17,15 +19,14 @@ class Movie extends React.Component<IMovieProps, {}> {
           {this.props.movie.title}
         </td>
         <td>
-          <button className="btn btn-default">
+          <button onClick={() => this.props.toggleWatchedMovieCallback(this.props.movie.id)} className="btn btn-default">
             <span className={this.props.movie.isWatched ?
               "glyphicon glyphicon-ok" : "glyphicon glyphicon-minus"}>
             </span>
           </button>
         </td>
         <td>
-          <button 
-            className="btn btn-danger">
+          <button className="btn btn-danger">
             <span className="glyphicon glyphicon-trash"></span>
           </button>
         </td>
