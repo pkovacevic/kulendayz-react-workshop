@@ -25,9 +25,12 @@ class App extends React.Component<{}, IAppState> {
   }
 
   componentDidMount() {
+    this.setState({ isLoading: true })
+
     getMoviesAsync().then(r => {
       this.setState({
-        movies: r.data
+        movies: r.data,
+        isLoading: false
       })
     })
   }
