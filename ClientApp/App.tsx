@@ -54,6 +54,7 @@ class App extends React.Component<{}, IAppState> {
 
   handleAddMovie = (title: string) => {
     this.setState(prevState => ({
+      filterText: "",
       movies: [
         ...prevState.movies,
         { id: this.createId(), title: title, isWatched: false } as IMovie
@@ -86,7 +87,10 @@ class App extends React.Component<{}, IAppState> {
       <div className="container">
         {this.state.isLoading && <div>Loading...</div>}
         <Header text="Movies" />
-        <FilterBox handleFilterChange={this.handleFilterChange} />
+        <FilterBox
+          filter={this.state.filterText}
+          handleFilterChange={this.handleFilterChange}
+        />
         <MovieList
           movies={movies}
           toggleWatchedMovieCallback={this.toggleWatchedMovieCallback}

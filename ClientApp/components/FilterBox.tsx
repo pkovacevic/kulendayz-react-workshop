@@ -2,21 +2,13 @@ import * as React from "react"
 import Label from "./Label"
 
 export interface Props {
+  filter: string
   handleFilterChange: (filter: string) => void
 }
 
-export interface State {
-  filter: string
-}
-
-class FilterBox extends React.Component<Props, State> {
-  state = {
-    filter: ""
-  }
-
+class FilterBox extends React.Component<Props, {}> {
   handleFilterChange = (e: any) => {
     let filter = e.target.value
-    this.setState({ filter: filter })
     this.props.handleFilterChange(filter)
   }
 
@@ -28,7 +20,7 @@ class FilterBox extends React.Component<Props, State> {
           <input
             className="form-control"
             type="text"
-            value={this.state.filter}
+            value={this.props.filter}
             onChange={this.handleFilterChange}
           />
         </div>
