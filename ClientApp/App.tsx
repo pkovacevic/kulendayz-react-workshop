@@ -1,52 +1,47 @@
-import * as React from 'react';
-import Header from './components/Header';
-import FilterBox from './components/FilterBox';
-import MovieList from './components/MovieList';
-import AddMovieBox from './components/AddMovieBox';
-import Footer from './components/Footer';
-import IMovie from './models/IMovie';
-import { getMovies } from './services/movieService';
+import * as React from "react"
+import Header from "./components/Header"
+import FilterBox from "./components/FilterBox"
+import MovieList from "./components/MovieList"
+import AddMovieBox from "./components/AddMovieBox"
+import Footer from "./components/Footer"
+import IMovie from "./models/IMovie"
+import { getMovies } from "./services/movieService"
 
 interface IAppState {
-  isLoading: boolean;
-  movies: IMovie[];
-  filterText: string;
-  addMovieText: string;
-  errorText: string | null;
+  isLoading: boolean
+  movies: IMovie[]
+  filterText: string
+  addMovieText: string
+  errorText: string | null
 }
 
-
 class App extends React.Component<{}, IAppState> {
-  constructor() {
-    super();
-    this.state = {
-      isLoading: false,
-      addMovieText: "",
-      errorText: null,
-      movies: [],
-      filterText: ""
-    };
+  state: IAppState = {
+    isLoading: false,
+    addMovieText: "",
+    errorText: null,
+    movies: [],
+    filterText: ""
   }
 
   componentDidMount() {
     this.setState({
       movies: getMovies()
-    });
+    })
   }
-
 
   toggleWatchedMovieCallback = (movieId: number) => {
     this.setState(prevState => {
       let newListOfMovies = prevState.movies.map(m => {
         if (m.id !== movieId) {
-          return m;
+          return m
         }
-        return { ...m, isWatched: !m.isWatched };
-      });
+        return { ...m, isWatched: !m.isWatched }
+      })
       return {
         movies: newListOfMovies
       }
-    });
+    })
   }
 
   removeMovieCallback = (movieId: number) => {
@@ -54,7 +49,28 @@ class App extends React.Component<{}, IAppState> {
       return {
         movies: prevState.movies.filter(m => m.id != movieId)
       }
-    });
+    })
+  }
+
+  handleAddMovie = (title: string) => {
+    this.setState(prevState => ({
+      movies: [
+        ...prevState.movies,
+        { id: this.createId(), title: title, isWatched: false } as IMovie
+      ]
+    }))
+  }
+
+  // Create a new id larger than all ids currently in the movies list
+  createId = () => {
+    let id = 1
+    let movies = this.state.movies
+
+    movies.forEach(m => {
+      if (m.id > id) id = m.id + 1
+    })
+
+    return id
   }
 
   render() {
@@ -68,11 +84,11 @@ class App extends React.Component<{}, IAppState> {
           toggleWatchedMovieCallback={this.toggleWatchedMovieCallback}
           removeMovieCallback={this.removeMovieCallback}
         />
-        <AddMovieBox />
+        <AddMovieBox handleAddMovie={this.handleAddMovie} />
         <Footer text="Kulendayz" />
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
