@@ -73,14 +73,22 @@ class App extends React.Component<{}, IAppState> {
     return id
   }
 
+  handleFilterChange = (filter: string) => {
+    this.setState({ filterText: filter })
+  }
+
   render() {
+    let { movies, filterText } = this.state
+    if (filterText)
+      movies = movies.filter(m => m.title.indexOf(filterText) !== -1)
+
     return (
       <div className="container">
         {this.state.isLoading && <div>Loading...</div>}
         <Header text="Movies" />
-        <FilterBox />
+        <FilterBox handleFilterChange={this.handleFilterChange} />
         <MovieList
-          movies={this.state.movies}
+          movies={movies}
           toggleWatchedMovieCallback={this.toggleWatchedMovieCallback}
           removeMovieCallback={this.removeMovieCallback}
         />
