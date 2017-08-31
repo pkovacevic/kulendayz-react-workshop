@@ -1,3 +1,4 @@
+import axios from 'axios'
 import IMovie from '../models/IMovie';
 
 export function getMovies(): IMovie[] {
@@ -19,4 +20,8 @@ export function getMovies(): IMovie[] {
         isWatched: false,
         title: 'Twilight'
     }];
+}
+
+export function getMoviesAsync() {
+    return axios.get('/api/movies')
 }

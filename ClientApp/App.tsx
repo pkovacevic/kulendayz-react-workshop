@@ -5,7 +5,7 @@ import MovieList from "./components/MovieList"
 import AddMovieBox from "./components/AddMovieBox"
 import Footer from "./components/Footer"
 import IMovie from "./models/IMovie"
-import { getMovies } from "./services/movieService"
+import { getMoviesAsync } from "./services/movieService"
 
 interface IAppState {
   isLoading: boolean
@@ -25,8 +25,10 @@ class App extends React.Component<{}, IAppState> {
   }
 
   componentDidMount() {
-    this.setState({
-      movies: getMovies()
+    getMoviesAsync().then(r => {
+      this.setState({
+        movies: r.data
+      })
     })
   }
 
